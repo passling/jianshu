@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {CSSTransition} from 'react-transition-group'
 import {GlobalStyle} from  '../../statics/iconfont/iconfont'
 import {connect} from 'react-redux'
-import {searchFocus, searchBlur, getList} from '../../store/actionCreators'
+import {searchFocus, searchBlur, getList, changePage, mouseEnter, mouseLeave} from '../../store/actionCreators'
 import {
     HeaderWrapper,
     Logo,
@@ -21,9 +21,10 @@ import {
 
 class Header extends Component{
     getListArea () {
-        const list = this.props.list.toJS()
+
     }
     render () {
+        const {focused, handleInputFocus, handleInputBlur, handleChangePage, page, totalPage, list, onMouseEnter, onMouseLeave, mouseIn} = this.props
         return (
             <HeaderWrapper>
                 <Logo/>
@@ -35,33 +36,39 @@ class Header extends Component{
                     <NavItem className="right">Aa</NavItem>
                     <SearchWrapper>
                         <CSSTransition
-                            in={this.props.focused}
+                            in={focused}
                             timeout={200}
                             classNames="slide"
                         >
                             <NavSearch
-                                className={this.props.focused ? 'focused' : ''}
-                                onFocus={this.props.handleInputFocus}
-                                onBlur={this.props.handleInputBlur}
+                                className={focused ? 'focused' : ''}
+                                onFocus={() =>handleInputFocus(list)}
+                                onBlur={handleInputBlur}
                             />
                         </CSSTransition>
-                        <i className={this.props.focused ? 'focused zoom iconfont icon-fangdajing' : 'iconfont zoom icon-fangdajing'}/>
-                        <SearchInfo>
-                            <SearchInfoTitle>
-                                热门搜索
-                                <SearchInfoSwitch
-                                    onClick = {() => this.props.handleChangePage(this.spinIcon)}
-                                >
-                                    <i ref={(icon) => {this.spinIcon = icon}} className="iconfont icon-shuaxin spin"/>
-                                    换一批
-                                </SearchInfoSwitch>
-                            </SearchInfoTitle>
-                            <SearchInfoList>
-                                {this.props.list.toJS().map(item => (
-                                    <SearchInfoItem key={item}>{item}</SearchInfoItem>
-                                ))}
-                            </SearchInfoList>
-                        </SearchInfo>
+                        <i className={focused ? 'focused zoom iconfont icon-fangdajing' : 'iconfont zoom icon-fangdajing'}/>
+                        {
+                            focused || mouseIn ? <SearchInfo
+                                onMouseEnter={() => onMouseEnter()}
+                                onMouseLeave={() => onMouseLeave()}
+                            >
+                                <SearchInfoTitle>
+                                    热门搜索
+                                    <SearchInfoSwitch
+                                        onClick = {() => handleChangePage(page, totalPage, this.spinIcon)}
+                                    >
+                                        <i ref={(icon) => {this.spinIcon = icon}} className="iconfont icon-shuaxin spin"/>
+                                        换一批
+                                    </SearchInfoSwitch>
+                                </SearchInfoTitle>
+                                <SearchInfoList>
+                                    {list.toJS().slice((page - 1) * 10, page * 10).map(item => (
+                                        <SearchInfoItem key={item}>{item}</SearchInfoItem>
+                                    ))}
+                                </SearchInfoList>
+                            </SearchInfo> : null
+                        }
+
                     </SearchWrapper>
                 </Nav>
                 <Addition>
@@ -81,19 +88,22 @@ class Header extends Component{
 const mapStateToProps = (state) => {
     return {
         focused: state.get('focused'),
-        list: state.get('list')
+        list: state.get('list'),
+        page: state.get('page'),
+        totalPage: state.get('totalPage'),
+        mouseIn: state.get('mouseIn')
     }
 }
 const mapDispathToProps = (dispatch => {
     return {
-        handleInputFocus() {
-            dispatch(getList())
+        handleInputFocus(list) {
+            (list.size === 0) && dispatch(getList())
             dispatch(searchFocus())
         },
         handleInputBlur() {
             dispatch(searchBlur())
         },
-        handleChangePage(spin) {
+        handleChangePage(page, totalPage, spin) {
             let originAngle = spin.style.transform.replace(/[^0-9]/ig, '')
             if (originAngle) {
                 originAngle = parseInt(originAngle)
@@ -101,7 +111,19 @@ const mapDispathToProps = (dispatch => {
                 originAngle = 0
             }
             spin.style.transform = 'rotate('+ (originAngle + 360) + 'deg)'
+            if (page < totalPage) {
 
+                dispatch(changePage(page + 1))
+            } else {
+                dispatch(changePage(1))
+            }
+
+        },
+        onMouseEnter () {
+            dispatch(mouseEnter())
+        },
+        onMouseLeave() {
+            dispatch(mouseLeave())
         }
     }
 })
