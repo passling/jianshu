@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {CSSTransition} from 'react-transition-group'
 import {GlobalStyle} from  '../../statics/iconfont/iconfont'
 import {connect} from 'react-redux'
-import {searchFocus, searchBlur, getList, changePage, mouseEnter, mouseLeave} from '../../store/actionCreators'
+import {actionCreators} from './store'
 import {
     HeaderWrapper,
     Logo,
@@ -20,9 +20,6 @@ import {
 } from './style'
 
 class Header extends Component{
-    getListArea () {
-
-    }
     render () {
         const {focused, handleInputFocus, handleInputBlur, handleChangePage, page, totalPage, list, onMouseEnter, onMouseLeave, mouseIn} = this.props
         return (
@@ -87,21 +84,21 @@ class Header extends Component{
 }
 const mapStateToProps = (state) => {
     return {
-        focused: state.get('focused'),
-        list: state.get('list'),
-        page: state.get('page'),
-        totalPage: state.get('totalPage'),
-        mouseIn: state.get('mouseIn')
+        focused: state.getIn(['header', 'focused']),
+        list: state.getIn(['header', 'list']),
+        page: state.getIn(['header', 'page']),
+        totalPage: state.getIn(['header', 'totalPage']),
+        mouseIn: state.getIn(['header', 'mouseIn'])
     }
 }
 const mapDispathToProps = (dispatch => {
     return {
         handleInputFocus(list) {
-            (list.size === 0) && dispatch(getList())
-            dispatch(searchFocus())
+            (list.size === 0) && dispatch(actionCreators.getList())
+            dispatch(actionCreators.searchFocus())
         },
         handleInputBlur() {
-            dispatch(searchBlur())
+            dispatch(actionCreators.searchBlur())
         },
         handleChangePage(page, totalPage, spin) {
             let originAngle = spin.style.transform.replace(/[^0-9]/ig, '')
@@ -113,17 +110,17 @@ const mapDispathToProps = (dispatch => {
             spin.style.transform = 'rotate('+ (originAngle + 360) + 'deg)'
             if (page < totalPage) {
 
-                dispatch(changePage(page + 1))
+                dispatch(actionCreators.changePage(page + 1))
             } else {
-                dispatch(changePage(1))
+                dispatch(actionCreators.changePage(1))
             }
 
         },
         onMouseEnter () {
-            dispatch(mouseEnter())
+            dispatch(actionCreators.mouseEnter())
         },
         onMouseLeave() {
-            dispatch(mouseLeave())
+            dispatch(actionCreators.mouseLeave())
         }
     }
 })
