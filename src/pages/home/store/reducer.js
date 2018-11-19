@@ -6,8 +6,10 @@ const defaultState = fromJS({
 export default (state = defaultState, action) => {
     switch (action.type) {
         case constans.CHANGE_HOME_DATA:
-            console.log(action.bannerList)
-            return state.set('bannerList', action.bannerList)
+            return state.merge({
+                'bannerList': action.bannerList,
+                'articleList': action.articleList
+        })
         default:
             return state
     }

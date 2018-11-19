@@ -11,9 +11,6 @@ import {
     HomeLeft,
     HomeRight
 } from "./style";
-const Img = [
-
-]
 class Home extends Component{
     componentDidMount() {
         this.props.changeHomeData()
