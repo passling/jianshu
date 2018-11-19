@@ -1,19 +1,28 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {actionCreators} from '../home/store'
 import List from './components/List'
 import Recommend from './components/Recommend'
 import Writer from './components/Writer'
+import Slider from './components/Slider'
+
 import {
     HomeWrapper,
     HomeLeft,
     HomeRight
 } from "./style";
+const Img = [
 
+]
 class Home extends Component{
+    componentDidMount() {
+        this.props.changeHomeData()
+    }
     render () {
         return(
             <HomeWrapper>
                 <HomeLeft>
-                    <img className="banner-img" src="https://upload.jianshu.io/admin_banners/web_images/4573/8e236c77ce2141beeaee6515fb3abddfbb617fea.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540" alt=""/>
+                    <Slider images={this.props.bannerList}/>
                     <List/>
                 </HomeLeft>
                 <HomeRight>
@@ -24,4 +33,16 @@ class Home extends Component{
         )
     }
 }
-export default Home
+const mapStateToProps = (state) => {
+    return {
+        bannerList: state.getIn(['home', 'bannerList'])
+    }
+}
+const mapDiapathToProps = (dispatch => {
+    return {
+        changeHomeData () {
+            dispatch(actionCreators.getHomeInfo())
+        }
+    }
+})
+export default connect(mapStateToProps, mapDiapathToProps)(Home)
