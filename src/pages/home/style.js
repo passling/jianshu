@@ -64,3 +64,85 @@ export const ListInfo = styled.div`
         -webkit-line-clamp:2
     }
 `
+export const RecommendItem = styled.div`
+    width: 100%;
+    height:50px;
+    margin-bottom: 5px;
+    img{
+        display: block;
+        width:100%;
+        height:100%;
+    }
+
+`
+export const DownLoadWrapper = styled.div`
+    position: relative
+    margin:12px 0 30px;
+    padding: 10px 22px;
+    width: 100%;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    background-color: #fff;
+    box-sizing:border-box;
+    cursor: pointer;
+    img{
+         width: 60px;
+         height: 60px;
+         opacity: .85;
+         vertical-align: middle;
+    }
+`
+export const DownLoadInfo = styled.div`
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 12px;
+    .title{
+        font-size: 15px;
+        line-height: 21px;
+        color: #333;
+    }
+    .desc{
+        margin-top: 4px;
+        font-size: 13px;
+        color: #999;
+    }
+`
+export const DownLoadImg = styled.div`
+    position: absolute;
+    top: -195px;
+    width:180px;
+    height: 180px;
+    padding: 12px;
+    box-sizing: border-box;
+    left: 50px;
+    border: 1px solid #999;
+    background: #fff;
+    &:before{
+        position: absolute;
+        content: '';
+        left: 75px;
+        bottom: -30px;
+        width: 0;
+        height: 0;
+        border-top: 15px solid  #999;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+    }
+    &:after{
+        position: absolute;
+        content: '';
+        left: 75px;
+        bottom: -29px;
+        width: 0;
+        height: 0;
+        border-top: 15px solid  #fff;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+    }
+    img{
+        width: 100%;
+        height: 100%;
+    }
+`

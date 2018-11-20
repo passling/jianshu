@@ -3,7 +3,8 @@ import axios from 'axios'
 export const getHomeData = (result) => ({
     type: constans.CHANGE_HOME_DATA,
     bannerList: result.bannerList,
-    articleList: result.articleList
+    articleList: result.articleList,
+    recommendList: result.recommendList
 })
 export const getHomeInfo = () => {
     return (dispatch => {

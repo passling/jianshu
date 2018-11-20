@@ -5,6 +5,7 @@ import List from './components/List'
 import Recommend from './components/Recommend'
 import Writer from './components/Writer'
 import Slider from './components/Slider'
+import DownLoad from './components/DownLoad'
 
 import {
     HomeWrapper,
@@ -24,6 +25,7 @@ class Home extends Component{
                 </HomeLeft>
                 <HomeRight>
                     <Recommend/>
+                    <DownLoad/>
                     <Writer/>
                 </HomeRight>
             </HomeWrapper>
