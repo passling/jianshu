@@ -32,7 +32,8 @@ class Home extends Component{
 }
 const mapStateToProps = (state) => {
     return {
-        bannerList: state.getIn(['home', 'bannerList'])
+        bannerList: state.getIn(['home', 'bannerList']),
+        articleList: state.getIn(['home', 'articleList'])
     }
 }
 const mapDiapathToProps = (dispatch => {
