@@ -14,6 +14,13 @@ class Slider extends Component{
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+           observer:true,//修改swiper自己或子元素时，自动初始化swiper
+           observeParents:false,//修改swiper的父元素时，自动初始化swiper
+           onSlideChangeEnd: function(swiper){
+               swiper.update();
+               Swiper.startAutoplay();
+               Swiper.reLoop();
+           }
        })
     }
     render() {
