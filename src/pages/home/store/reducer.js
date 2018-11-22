@@ -3,7 +3,9 @@ import {fromJS} from 'immutable'
 const defaultState = fromJS({
     bannerList: [],
     articleList: [],
-    recommendList: []
+    recommendList: [],
+    writerList: [],
+    writerTotalPage: 0
 })
 export default (state = defaultState, action) => {
     switch (action.type) {
@@ -13,6 +15,11 @@ export default (state = defaultState, action) => {
                 'articleList': fromJS(action.articleList),
                 'recommendList': fromJS(action.recommendList)
         })
+        case constans.GET_WRITER_LIST:
+            return state.merge({
+                'writerList': fromJS(action.list),
+                'writerTotalPage': fromJS(action.writerListTotalPage)
+            })
         default:
             return state
     }

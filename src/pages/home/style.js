@@ -68,6 +68,7 @@ export const RecommendItem = styled.div`
     width: 100%;
     height:50px;
     margin-bottom: 5px;
+    cursor: pointer;
     img{
         display: block;
         width:100%;
@@ -145,4 +146,69 @@ export const DownLoadImg = styled.div`
         width: 100%;
         height: 100%;
     }
+`
+export const WriterWrapper = styled.div`
+    width: 280px;
+    .writerList{
+        margin-top: 15px;
+        overflow: hidden;
+        img{
+            width:48px;
+            height: 48px;
+            border-radius: 50%;
+            float: left; 
+        }
+        .detailBox{
+            float:left;
+            margin-left: 10px;
+            width: 220px
+        }
+        .writerName{
+            font-size: 14px;
+            line-height: 25px;
+            span{
+                float: right;
+                color: #42c02e;
+                font-size: 13px        
+            }
+        }
+        .writerDetail {
+            font-size: 12px;
+            color: #969696;
+            line-height: 20px;
+         
+        }
+    }
+`
+export const WriterTitle = styled.div`
+    font-size: 14px;
+    color: #969696;
+`
+export const WriterSwitch = styled.span`
+    float: right;
+    font-size: 14px;
+    color: #969696;
+    cursor: pointer;
+    .spin{
+        float:left;
+        margin-right: 4px;
+        display:block
+        font-size: 13px;
+        transition: all .3s ease;
+        transform-origin: center center
+    }
+`
+export const WriterButton = styled.div`
+    width: 280px;
+    padding: 7px 7px 7px 12px;
+    font-size: 13px;
+    color: #787878;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    line-height:20px;
+    background: #f7f7f7;
+    box-sizing: border-box;
+    margin-top: 20px;
 `
