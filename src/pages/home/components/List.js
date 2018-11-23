@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {ListItem, ListInfo} from "../style";
+import {ListItem, ListInfo, LoreMore} from "../style";
 
 class List extends Component{
     render() {
@@ -23,6 +23,7 @@ class List extends Component{
                         </ListItem>
                     ))
                 }
+                <LoreMore>加载更多</LoreMore>
             </div>
         )
     }

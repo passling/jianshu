@@ -53,7 +53,7 @@ class Writer extends Component{
                             <li className="writerList" key={item.id}>
                                 <img src={item.avatar_source} alt=""/>
                                 <div className="detailBox">
-                                    <p className="writerName">{item.nickname} <span>关注</span></p>
+                                    <p className="writerName">{item.nickname} <span><i className="iconfont icon-icon-test"/>关注</span></p>
                                     <p className="writerDetail">
                                         写了{item.total_likes_count}字 <span style={{marginLeft: '5px'}}>· {item.total_wordage}喜欢</span>
                                     </p>
@@ -62,7 +62,7 @@ class Writer extends Component{
                         ))
                     }
                 </ul>
-                <WriterButton>查看全部</WriterButton>
+                <WriterButton>查看全部<i className="iconfont icon-you"/></WriterButton>
             </WriterWrapper>
         )
     }

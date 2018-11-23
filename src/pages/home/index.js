@@ -10,11 +10,52 @@ import DownLoad from './components/DownLoad'
 import {
     HomeWrapper,
     HomeLeft,
-    HomeRight
+    HomeRight,
+    BackTop
 } from "./style";
 class Home extends Component{
+    constructor() {
+        super()
+        this.state = {
+            showToTop: false
+        }
+        this.handleScrollTop = this.handleScrollTop.bind(this)
+    }
     componentDidMount() {
         this.props.changeHomeData()
+        this.bindScrollEvent()
+    }
+    handleScrollTop() {
+        let scrollTopTimer = setInterval(function() {
+            const top = document.documentElement.scrollTop || document.body.scrollTop
+            const speed = top / 4
+            if (document.body.scrollTop!==0) {
+                document.body.scrollTop -= speed;
+            }else {
+                document.documentElement.scrollTop -= speed;
+            }
+            if (top === 0) {
+                clearInterval(scrollTopTimer);
+            }
+        }, 30)
+
+
+    }
+    bindScrollEvent() {
+        let self = this
+        document.addEventListener('scroll', function() {
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            if (scrollTop > 200) {
+                self.setState({
+                    showToTop: true
+                })
+            } else {
+                self.setState({
+                    showToTop: false
+                })
+            }
+
+        })
     }
     render () {
         return(
@@ -28,6 +69,7 @@ class Home extends Component{
                     <DownLoad/>
                     <Writer/>
                 </HomeRight>
+                {this.state.showToTop ? <BackTop onClick={() => this.handleScrollTop()}><i className="iconfont icon-arrow-up"/></BackTop> : null}
             </HomeWrapper>
         )
     }

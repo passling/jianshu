@@ -4,9 +4,10 @@ import 'swiper/dist/css/swiper.min.css'
 import './index.css'
 class Slider extends Component{
     componentDidMount() {
-       new Swiper('.swiper-container', {
+       let bannerSwiper = new Swiper('.swiper-container', {
             loop: true,
-            autoplay: true,
+            autoplay:true,
+            autoplayDisableOnInteraction : false,
             pagination: {
                 el: '.swiper-pagination',
             },
@@ -18,8 +19,8 @@ class Slider extends Component{
            observeParents:false,//修改swiper的父元素时，自动初始化swiper
            onSlideChangeEnd: function(swiper){
                swiper.update();
-               Swiper.startAutoplay();
-               Swiper.reLoop();
+               bannerSwiper.startAutoplay();
+               bannerSwiper.reLoop();
            }
        })
     }

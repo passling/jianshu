@@ -171,6 +171,9 @@ export const WriterWrapper = styled.div`
                 color: #42c02e;
                 font-size: 13px        
             }
+            .iconfont{
+                font-size: 13px;
+            }
         }
         .writerDetail {
             font-size: 12px;
@@ -211,4 +214,36 @@ export const WriterButton = styled.div`
     background: #f7f7f7;
     box-sizing: border-box;
     margin-top: 20px;
+    .iconfont{
+        font-size: 13px;
+    }
+`
+export const LoreMore = styled.div`
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: #fff;
+    background: #a5a5a5;
+    text-align: center;
+    box-sizing: border-box;
+    line-height: 20px;
+    margin: 30px auto 60px;
+`
+export const BackTop = styled.div`
+    position: fixed;
+    right:30px;
+    bottom: 50px;
+    border: 1px solid #dcdcdc;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background: #fff;
+    &:hover{
+        background-color: hsla(0,0%,71%,.1);
+        transition: .1s ease-in;
+    }
+    .iconfont{
+        font-size: 20px;
+    }
 `
